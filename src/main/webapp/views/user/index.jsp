@@ -16,7 +16,7 @@
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
             <h2 class="col-6 tm-text-primary">
-                Latest Photos
+                List Video
             </h2>
             <div class="col-6 d-flex justify-content-end align-items-center">
                 <form action="" class="tm-text-primary">
@@ -34,7 +34,7 @@
                     <img src="<c:url value='/templates/user/img/img-03.jpg' />" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>View more</h2>
-                        <a href="photo-detail.html">View more</a>
+                        <a href="<c:url value="/video?action=watch&id=${video.href}" />" >View more</a>
                     </figcaption>                    
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
