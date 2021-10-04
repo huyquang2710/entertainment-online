@@ -19,12 +19,13 @@ import com.entertain.services.impl.UserServiceImpl;
 public class UserController extends HttpServlet {
 
 	private static final long serialVersionUID = -8150742089910480458L;
-	
+
 	private IUserService userService = new UserServiceImpl();
 
 	// do get
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession(); // luu thong tin user
 		String path = req.getServletPath(); // localhost:8080/login --> path = /login
 
 		switch (path) {
@@ -36,19 +37,30 @@ public class UserController extends HttpServlet {
 			doGetRegister(req, resp);
 			break;
 		}
-		default:
+		case "/logout": {
+			doGetLoout(session, req, resp);
 			break;
 		}
+		}
 	}
+
 	// get login
 	private void doGetLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/user/login.jsp");
 		requestDispatcher.forward(req, resp);
 	}
-	//get register
+
+	// get register
 	private void doGetRegister(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/user/register.jsp");
 		requestDispatcher.forward(req, resp);
+	}
+
+	// get logout
+	private void doGetLoout(HttpSession session, HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		session.removeAttribute(SessionAttr.CURRENT_USER);
+		resp.sendRedirect("index");
 	}
 
 	// do post
@@ -70,38 +82,41 @@ public class UserController extends HttpServlet {
 			break;
 		}
 	}
-	
+
 	// post login
-	private void doPostLogin(HttpSession session, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private void doPostLogin(HttpSession session, HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		// lay params username & password tu login form
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		
+
 		// truyen username & password vao login method
 		User user = userService.login(username, password);
-		
-		if(user != null) {
+
+		if (user != null) {
 			session.setAttribute(SessionAttr.CURRENT_USER, user);
 			resp.sendRedirect("index");
 		} else {
 			resp.sendRedirect("login");
-		}	
-	}
-	// post register
-		private void doPostRegister(HttpSession session, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			// lay params username & password & email tu register form
-			String username = req.getParameter("username");
-			String password = req.getParameter("password");
-			String email = req.getParameter("email");
-			
-			// truyen username & password & email vao register method
-			User user = userService.create(username, password, email);
-			
-			if(user != null) {
-				session.setAttribute(SessionAttr.CURRENT_USER, user);
-				resp.sendRedirect("index");
-			} else {
-				resp.sendRedirect("register");
-			}	
 		}
+	}
+
+	// post register
+	private void doPostRegister(HttpSession session, HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// lay params username & password & email tu register form
+		String username = req.getParameter("username");
+		String password = req.getParameter("password");
+		String email = req.getParameter("email");
+
+		// truyen username & password & email vao register method
+		User user = userService.create(username, password, email);
+
+		if (user != null) {
+			session.setAttribute(SessionAttr.CURRENT_USER, user);
+			resp.sendRedirect("index");
+		} else {
+			resp.sendRedirect("register");
+		}
+	}
 }
