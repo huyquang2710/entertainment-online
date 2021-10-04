@@ -32,13 +32,22 @@ public class UserController extends HttpServlet {
 			doGetLogin(req, resp);
 			break;
 		}
+		case "/register": {
+			doGetRegister(req, resp);
+			break;
+		}
 		default:
 			break;
 		}
 	}
-
+	// get login
 	private void doGetLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/user/login.jsp");
+		requestDispatcher.forward(req, resp);
+	}
+	//get register
+	private void doGetRegister(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/user/register.jsp");
 		requestDispatcher.forward(req, resp);
 	}
 
@@ -53,11 +62,13 @@ public class UserController extends HttpServlet {
 			doPostLogin(session, req, resp);
 			break;
 		}
+
 		default:
 			break;
 		}
 	}
-
+	
+	// post login
 	private void doPostLogin(HttpSession session, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// lay params username & password tu login form
 		String username = req.getParameter("username");
