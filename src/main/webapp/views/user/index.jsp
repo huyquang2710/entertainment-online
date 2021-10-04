@@ -29,16 +29,17 @@
         	<c:forEach items="${videos}" var="video">
         	
         		<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+        		<h5 class="tm-text-secondary" style="while-space: nowrap; overflow: hidden;" >${ video.title }</h5>
                 <figure class="effect-ming tm-video-item">
-                    <img src="img/img-03.jpg" alt="Image" class="img-fluid">
+                    <img src="<c:url value='/templates/user/img/img-03.jpg' />" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Clocks</h2>
+                        <h2>View more</h2>
                         <a href="photo-detail.html">View more</a>
                     </figcaption>                    
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">18 Oct 2020</span>
-                    <span>9,906 views</span>
+                    <span class="tm-text-gray-light"> ${ video.shares } shares</span>
+                    <span>${ video.views } views</span>
                 </div>
             </div>    
             
