@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/common/taglib.jsp"%>
    <!-- Page Loader -->
     <div id="loader-wrapper">
         <div id="loader"></div>
@@ -19,27 +20,34 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link nav-link-1 active" aria-current="page" href="index.html">Welcome, </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-2" href="videos.html">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-3" href="about.html">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-4" href="contact.html">Forgot password</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-4" href="contact.html">My Favotires</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-4" href="contact.html">History</a>
-                </li>
-                 <li class="nav-item">
-                    <a class="nav-link nav-link-4" href="contact.html">Log out</a>
-                </li>
+            	
+            	<c:choose>
+            		<c:when test="${ not empty sessionScope.currentUser }">
+	            		<li class="nav-item">
+	                    	<a class="nav-link nav-link-1 active" aria-current="page">Welcome, ${ sessionScope.currentUser.username }</a>
+	                	</li>
+	                 	<li class="nav-item">
+	                   		 <a class="nav-link nav-link-4" href="favotires">My Favotires</a>
+	               		 </li>
+	                	<li class="nav-item">
+	                 	  	 <a class="nav-link nav-link-4" href="history">History</a>
+	               		 </li>
+	                 	<li class="nav-item">
+	                 	  	 <a class="nav-link nav-link-4" href="logout">Log out</a>
+	                	</li>
+            		</c:when>
+            		<c:otherwise>
+            			 <li class="nav-item">
+                  			 <a class="nav-link nav-link-2" href="login">Login</a>
+             		  	 </li>
+               			 <li class="nav-item">
+                 		     <a class="nav-link nav-link-3" href="register">Register</a>
+             		     </li>
+            		    <li class="nav-item">
+                   			 <a class="nav-link nav-link-4" href="forgotpass">Forgot password</a>
+               			 </li>
+            		</c:otherwise>
+            	</c:choose>
             </ul>
             </div>
         </div>
