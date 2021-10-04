@@ -19,9 +19,6 @@
 		<!--JSTL -->
 		<jstl.version>1.2</jstl.version>
 
-		<!--Hibernate -->
-		<hibernate.version>4.3.6.Final</hibernate.version>
-
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -38,7 +35,29 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet.api.version}</version>
 		</dependency>
-
+		<!--Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.5.7.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.2</version>
+			<scope>provided</scope>
+		</dependency>
 		<!--MySQL -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -53,12 +72,7 @@
 			<version>${jstl.version}</version>
 		</dependency>
 
-		<!--Hibernate -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate.version}</version>
-		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
 		<dependency>
@@ -66,11 +80,7 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<version>2.0.4.RELEASE</version>
 		</dependency>
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>javax.persistence-api</artifactId>
-			<version>2.2</version>
-		</dependency>
+
 		<!-- json -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

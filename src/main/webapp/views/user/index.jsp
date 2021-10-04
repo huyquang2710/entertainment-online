@@ -25,7 +25,10 @@
             </div>
         </div>
         <div class="row tm-mb-90 tm-gallery">
-        	<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+        
+        	<c:forEach items="${videos}" var="video">
+        	
+        		<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
                     <img src="img/img-03.jpg" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
@@ -37,7 +40,11 @@
                     <span class="tm-text-gray-light">18 Oct 2020</span>
                     <span>9,906 views</span>
                 </div>
-            </div>     
+            </div>    
+            
+        	</c:forEach>
+        
+        	 
         </div> <!-- row -->
         <div class="row tm-mb-90">
             <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">

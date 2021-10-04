@@ -9,7 +9,11 @@ import com.entertain.services.IVideoService;
 
 public class VideoServiceImpl implements IVideoService{
 	
-	private IVideoRepository userRepo = new VideoRepositoryImpl();
+	private IVideoRepository userRepo;
+	
+	public VideoServiceImpl() {
+		userRepo = new VideoRepositoryImpl();
+	}
 
 	@Override
 	public Video findById(Integer id) {
