@@ -62,7 +62,10 @@ public class UserController extends HttpServlet {
 			doPostLogin(session, req, resp);
 			break;
 		}
-
+		case "/register": {
+			doPostRegister(session, req, resp);
+			break;
+		}
 		default:
 			break;
 		}
@@ -82,7 +85,23 @@ public class UserController extends HttpServlet {
 			resp.sendRedirect("index");
 		} else {
 			resp.sendRedirect("login");
-		}
-		
+		}	
 	}
+	// post register
+		private void doPostRegister(HttpSession session, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			// lay params username & password & email tu register form
+			String username = req.getParameter("username");
+			String password = req.getParameter("password");
+			String email = req.getParameter("email");
+			
+			// truyen username & password & email vao register method
+			User user = userService.create(username, password, email);
+			
+			if(user != null) {
+				session.setAttribute(SessionAttr.CURRENT_USER, user);
+				resp.sendRedirect("index");
+			} else {
+				resp.sendRedirect("register");
+			}	
+		}
 }
