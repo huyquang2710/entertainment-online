@@ -6,7 +6,7 @@ import com.entertain.entities.History;
 import com.entertain.repositories.AbstractRepository;
 import com.entertain.repositories.IHistoryRepository;
 
-public class HisoryRepository extends AbstractRepository<History> implements IHistoryRepository{
+public class HisoryRepositoryImpl extends AbstractRepository<History> implements IHistoryRepository{
 
 	@Override
 	public List<History> findByUser(String username) {
