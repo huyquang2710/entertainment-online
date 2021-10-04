@@ -6,7 +6,7 @@ import com.entertain.entities.Video;
 import com.entertain.repositories.AbstractRepository;
 import com.entertain.repositories.IVideoRepository;
 
-public class VideoRepository extends AbstractRepository<Video> implements IVideoRepository{
+public class VideoRepositoryImpl extends AbstractRepository<Video> implements IVideoRepository{
 
 	@Override
 	public Video findById(Integer id) {
@@ -28,6 +28,11 @@ public class VideoRepository extends AbstractRepository<Video> implements IVideo
 	@Override
 	public List<Video> findAll(int pageNumber, int pageSize) {
 		return super.findAll(Video.class, false, pageNumber, pageSize);
+	}
+
+	@Override
+	public Video delete(Video video) {
+		return super.delete(video);
 	}
 
 }
