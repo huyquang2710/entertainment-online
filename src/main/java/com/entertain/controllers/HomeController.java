@@ -21,7 +21,7 @@ import com.entertain.services.IVideoService;
 import com.entertain.services.impl.HistoryServiceImpl;
 import com.entertain.services.impl.VideoServiceImpl;
 
-@WebServlet(urlPatterns = { "/index", "/favorites", "/register" })
+@WebServlet(urlPatterns = { "/index", "/favorites", "/history" })
 public class HomeController extends HttpServlet {
 
 	private static final long serialVersionUID = -7131209992553490556L;

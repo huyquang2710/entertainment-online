@@ -11,7 +11,7 @@ public class HisoryRepositoryImpl extends AbstractRepository<History> implements
 	@Override
 	public List<History> findByUser(String username) {
 		// sql: SELECT * FROM history FROM userId
-		String hql = "SELECT o  FROM Hisory o WHERE o.user.username = ?0 AND o.video.isActive = 1" + " ORDER BY o.viewedDate DESC";	
+		String hql = "SELECT o  FROM History o WHERE o.user.username = ?0 AND o.video.isActive = 1" + " ORDER BY o.viewedDate DESC";	
 		return super.findMany(History.class, hql, username);
 	}
 

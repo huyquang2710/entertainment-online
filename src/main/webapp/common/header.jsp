@@ -27,7 +27,7 @@
 	                    	<a class="nav-link nav-link-1 active" aria-current="page">Welcome, ${ sessionScope.currentUser.username }</a>
 	                	</li>
 	                 	<li class="nav-item">
-	                   		 <a class="nav-link nav-link-4" href="favotires">My Favotires</a>
+	                   		 <a class="nav-link nav-link-4" href="favorites">My Favorites</a>
 	               		 </li>
 	                	<li class="nav-item">
 	                 	  	 <a class="nav-link nav-link-4" href="history">History</a>
