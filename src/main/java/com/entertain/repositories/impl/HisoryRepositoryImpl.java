@@ -25,7 +25,7 @@ public class HisoryRepositoryImpl extends AbstractRepository<History> implements
 
 	@Override
 	public History findByUserIdAndVideoId(Integer userId, Integer videoId) {
-		String hql = "SELECT o FROM History o WHERE o.user.userId = ?0 AND o.video.videoId = ?1"
+		String hql = "SELECT o FROM History o WHERE o.user.id = ?0 AND o.video.id = ?1"
 				+ " AND o.video.isActive = 1";
 		return super.findOne(History.class, hql, userId, videoId);
 	}

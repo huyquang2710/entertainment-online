@@ -38,13 +38,17 @@ public class HistoryServiceImpl implements IHistoryService{
 
 	@Override
 	public History create(User user, Video video) {
+		History exitsHistory = findByUserIdAndVideoId(user.getId(), video.getId());
 		
-		History history = new History();
-		history.setUser(user);
-		history.setVideo(video);
-		history.setIsLiked(Boolean.FALSE);
-		
-		return historyRepo.create(history);
+		if(exitsHistory == null) {
+			exitsHistory = new History();
+			exitsHistory.setUser(user);
+			exitsHistory.setVideo(video);
+			exitsHistory.setViewedDate(new Timestamp(System.currentTimeMillis()));
+			exitsHistory.setIsLiked(Boolean.FALSE);
+			return historyRepo.create(exitsHistory);
+		}
+		return exitsHistory;
 	}
 	
 	// check like & unlike

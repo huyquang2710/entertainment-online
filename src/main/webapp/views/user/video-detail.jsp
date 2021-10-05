@@ -26,9 +26,25 @@
             <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
                 <div class="tm-bg-gray tm-video-details">
                     <p class="mb-4">${ video.description }</p>
+                    
+                    <c:if test="${not empty sessionScope.currentUser }">
                     <div class="text-center mb-5">
-                        <a href="#" class="btn btn-primary tm-btn-big">Download</a>
-                    </div>                    
+                        <a href='<c:url value="/video?action=like&id=${video.href}" ></c:url>' class="btn btn-primary tm-btn-big">
+							<c:choose>
+								<c:when test="${ flagLikedBtn == true }">
+									Unlike
+								</c:when>
+								<c:otherwise>
+									Like
+								</c:otherwise>
+							</c:choose>
+						</a>
+                    </div>   
+                    <div class="text-center mb-5">
+                        <a href="#" class="btn btn-primary tm-btn-big">Share</a>
+                    </div>    
+                    </c:if>
+                                                   
                 </div>
             </div>
         </div>
