@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import com.entertain.constants.SessionAttr;
 import com.entertain.entities.User;
+import com.entertain.services.IEmailService;
 import com.entertain.services.IUserService;
+import com.entertain.services.impl.EmailServiceImpl;
 import com.entertain.services.impl.UserServiceImpl;
 
 @WebServlet(urlPatterns = { "/login", "/logout", "/register" })
@@ -21,6 +23,8 @@ public class UserController extends HttpServlet {
 	private static final long serialVersionUID = -8150742089910480458L;
 
 	private IUserService userService = new UserServiceImpl();
+	
+	private IEmailService emailService = new EmailServiceImpl();
 
 	// do get
 	@Override
@@ -113,6 +117,10 @@ public class UserController extends HttpServlet {
 		User user = userService.create(username, password, email);
 
 		if (user != null) {
+			
+			// send mail when dang ky thanh cong
+			emailService.sendMail(getServletContext(), user, "welcome");
+			
 			session.setAttribute(SessionAttr.CURRENT_USER, user);
 			resp.sendRedirect("index");
 		} else {
