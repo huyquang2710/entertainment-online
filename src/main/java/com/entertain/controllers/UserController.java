@@ -17,7 +17,7 @@ import com.entertain.services.IUserService;
 import com.entertain.services.impl.EmailServiceImpl;
 import com.entertain.services.impl.UserServiceImpl;
 
-@WebServlet(urlPatterns = { "/login", "/logout", "/register" })
+@WebServlet(urlPatterns = { "/login", "/logout", "/register","/forgotPass" })
 public class UserController extends HttpServlet {
 
 	private static final long serialVersionUID = -8150742089910480458L;
@@ -45,6 +45,10 @@ public class UserController extends HttpServlet {
 			doGetLoout(session, req, resp);
 			break;
 		}
+		case "/forgotPass": {
+			doGetForgotPass(req, resp);
+			break;
+		}
 		}
 	}
 
@@ -66,6 +70,12 @@ public class UserController extends HttpServlet {
 		session.removeAttribute(SessionAttr.CURRENT_USER);
 		resp.sendRedirect("index");
 	}
+	// get forgot pass
+	private void doGetForgotPass(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/user/forgot-pass.jsp");
+		requestDispatcher.forward(req, resp);
+	}
 
 	// do post
 	@Override
@@ -80,6 +90,10 @@ public class UserController extends HttpServlet {
 		}
 		case "/register": {
 			doPostRegister(session, req, resp);
+			break;
+		}
+		case "/forgotpass": {
+			doPostForgotPass(req, resp);
 			break;
 		}
 		default:
@@ -127,4 +141,18 @@ public class UserController extends HttpServlet {
 			resp.sendRedirect("register");
 		}
 	}
+	// post forgot pass
+		private void doPostForgotPass(HttpServletRequest req, HttpServletResponse resp)
+				throws ServletException, IOException {
+			resp.setContentType("application/json");
+			String email = req.getParameter("email");
+			
+			User userPassRandom = userService.resetPassword(email);
+			if(userPassRandom != null) {
+				emailService.sendMail(getServletContext(), userPassRandom, "forgot");
+				resp.setStatus(204);
+			} else {
+				resp.setStatus(400);
+			}
+		}
 }

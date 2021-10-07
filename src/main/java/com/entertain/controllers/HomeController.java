@@ -25,6 +25,9 @@ import com.entertain.services.impl.VideoServiceImpl;
 public class HomeController extends HttpServlet {
 
 	private static final long serialVersionUID = -7131209992553490556L;
+	
+	private static final int MAX_VIDEO_PAGE_SIZE = 3;
+	
 	private IVideoService videoService = new VideoServiceImpl();
 	private IHistoryService historyService = new HistoryServiceImpl();
 
@@ -49,14 +52,47 @@ public class HomeController extends HttpServlet {
 		}
 	}
 	// trang chu
+		// url phan trang /index?page={pageNumber}
+		// 
 	private void doGetIndex(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		List<Video> videosList = videoService.findAll();
+		List<Video> countVideo = videoService.findAll();
+		// max Page = 10 video.  moi trang co 4 video thi 10 / 4 = 2.5 -> 3
+		int maxPage = (int) Math.ceil(countVideo.size() / (double) MAX_VIDEO_PAGE_SIZE);
+		
+		String pageNumber = req.getParameter("page");
+		List<Video> videosList;
+		if(pageNumber == null) {
+			// mac dinh bang 1 khi user voa trang dau
+			videosList = videoService.findAll(1, MAX_VIDEO_PAGE_SIZE);
+			
+			// trang hien tai
+			req.setAttribute("currentPage", 1);
+		} else {
+			videosList = videoService.findAll(Integer.valueOf(pageNumber), MAX_VIDEO_PAGE_SIZE);
+			
+			// trang hien tai
+			req.setAttribute("currentPage", pageNumber);
+		}
+		
+		
 		req.setAttribute("videos", videosList);
+		req.setAttribute("maxPage", maxPage);
 
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/user/index.jsp");
 		requestDispatcher.forward(req, resp);
 	}
+	/*
+	 * private void doGetIndex(HttpServletRequest req, HttpServletResponse resp)
+	 * throws ServletException, IOException {
+	 * 
+	 * List<Video> videosList = videoService.findAll(); req.setAttribute("videos",
+	 * videosList);
+	 * 
+	 * RequestDispatcher requestDispatcher =
+	 * req.getRequestDispatcher("/views/user/index.jsp");
+	 * requestDispatcher.forward(req, resp); }
+	 */
+	
 	
 	// da like
 	private void doGetFavorites(HttpSession session, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

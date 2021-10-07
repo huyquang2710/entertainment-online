@@ -44,7 +44,7 @@
                  		     <a class="nav-link nav-link-3" href="register">Register</a>
              		     </li>
             		    <li class="nav-item">
-                   			 <a class="nav-link nav-link-4" href="forgotpass">Forgot password</a>
+                   			 <a class="nav-link nav-link-4" href="forgotPass">Forgot password</a>
                			 </li>
             		</c:otherwise>
             	</c:choose>

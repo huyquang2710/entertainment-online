@@ -37,6 +37,13 @@ public class UserServiceImpl implements IUserService{
 
 	@Override
 	public User resetPassword(String email) {
+		User existUser = findByEmail(email);
+		if(existUser != null) {
+			// create new pass random 1000 -> 9999
+			String ranPass = String.valueOf((int) (Math.random() * ((9999 - 1000) + 1)) + 1000);
+			existUser.setPassword(ranPass);
+			return userRepo.update(existUser);
+		}
 		return null;
 	}
 
