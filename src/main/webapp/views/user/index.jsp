@@ -8,6 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entertainment-Online</title>
     <%@include file="/common/head.jsp"%>
+    <style>
+    .hidden-title" {
+      
+    }
+    </style>
 </head>
 <body>
     <!-- Page Loader -->
@@ -29,9 +34,17 @@
         	<c:forEach items="${videos}" var="video">
         	
         		<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-        		<h5 class="tm-text-secondary" style="while-space: nowrap; overflow: hidden;" >${ video.title }</h5>
+
+        		<h5 class="tm-text-secondary hidden-title" style=" 
+        			text-overflow: ellipsis;
+   					white-space: nowrap;
+   		 			overflow: hidden;" >
+   		 			
+        			${ video.title }
+        		</h5>
+        		
                 <figure class="effect-ming tm-video-item">
-                    <img src="<c:url value='/templates/user/img/img-03.jpg' />" alt="Image" class="img-fluid">
+                    <img src="<c:url value='${ video.poster }' />" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>View more</h2>
                         <a href="<c:url value="/video?action=watch&id=${video.href}" />" >View more</a>
