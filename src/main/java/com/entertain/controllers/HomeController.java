@@ -26,7 +26,7 @@ public class HomeController extends HttpServlet {
 
 	private static final long serialVersionUID = -7131209992553490556L;
 	
-	private static final int MAX_VIDEO_PAGE_SIZE = 3;
+	private static final int MAX_VIDEO_PAGE_SIZE = 4;
 	
 	private IVideoService videoService = new VideoServiceImpl();
 	private IHistoryService historyService = new HistoryServiceImpl();
@@ -61,7 +61,9 @@ public class HomeController extends HttpServlet {
 		
 		String pageNumber = req.getParameter("page");
 		List<Video> videosList;
-		if(pageNumber == null) {
+		
+		// neu pageNo == null hoac lon hon maxPage thi tra ve default  = 1
+		if(pageNumber == null || Integer.valueOf(pageNumber) > maxPage ) {
 			// mac dinh bang 1 khi user voa trang dau
 			videosList = videoService.findAll(1, MAX_VIDEO_PAGE_SIZE);
 			
@@ -71,7 +73,7 @@ public class HomeController extends HttpServlet {
 			videosList = videoService.findAll(Integer.valueOf(pageNumber), MAX_VIDEO_PAGE_SIZE);
 			
 			// trang hien tai
-			req.setAttribute("currentPage", pageNumber);
+			req.setAttribute("currentPage", Integer.valueOf(pageNumber));
 		}
 		
 		
