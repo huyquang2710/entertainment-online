@@ -1,5 +1,6 @@
 package com.entertain.repositories.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class StatsRepositoryImpl extends AbstractRepository<VideoLikedInfo> impl
 		sql.append("ORDER BY SUM(h.isLiked) desc");
 		
 		// native query nen chi tra ve 1 object chu ko ro 1 kieu cu the
-		List<Object[]> objects = super.findMantByNativeQuery(VideoLikedInfo.class, sql.toString());
+		List<Object[]> objects = super.findMantByNativeQuery(sql.toString());
 		
 		//map data
 		List<VideoLikedInfo> result = new ArrayList<>();
@@ -38,8 +39,7 @@ public class StatsRepositoryImpl extends AbstractRepository<VideoLikedInfo> impl
 		likedInfo.setHref((String) object[2]); 
 		
 		//set truong hop ko co luot like nao
-		likedInfo.setTotalLike(object[3] == null ? 0 : (Integer) object[3]);
-		
+		likedInfo.setTotalLike((BigDecimal) object[3]);
 		return likedInfo;
 		
 	}

@@ -103,8 +103,8 @@ public class AbstractRepository<T> {
 	}
 	//find many sql
 	@SuppressWarnings("unchecked")
-	public List<Object[]> findMantByNativeQuery(Class<T> clazz, String sql, Object...params) {
-		Query query = ENTITY_MANAGER.createNativeQuery(sql, clazz);
+	public List<Object[]> findMantByNativeQuery(String sql, Object...params) {
+		Query query = ENTITY_MANAGER.createNativeQuery(sql);
 		
 		for(int i = 0; i < params.length; i++) {
 			query.setParameter(i, params[i]);

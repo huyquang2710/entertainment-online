@@ -1,10 +1,12 @@
 package com.entertain.dto;
 
+import java.math.BigDecimal;
+
 public class VideoLikedInfo {
 	private Integer videoId;
 	private String title;
 	private String href;
-	private Integer totalLike;
+	private BigDecimal totalLike;
 	
 	
 	
@@ -26,13 +28,12 @@ public class VideoLikedInfo {
 	public void setHref(String href) {
 		this.href = href;
 	}
-	public Integer getTotalLike() {
+	public BigDecimal getTotalLike() {
 		return totalLike;
 	}
-	public void setTotalLike(Integer totalLike) {
+	public void setTotalLike(BigDecimal totalLike) {
 		this.totalLike = totalLike;
 	}
-	
-	
+
 
 }

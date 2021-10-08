@@ -104,6 +104,7 @@ public class UserController extends HttpServlet {
 	// post login
 	private void doPostLogin(HttpSession session, HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		session = req.getSession();
 		// lay params username & password tu login form
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
